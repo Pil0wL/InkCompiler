@@ -1,6 +1,7 @@
 package com.fourthmach.inkcompiler;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -20,13 +21,19 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.fourthmach.inkcompiler.databinding.ActivityMainBinding;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private FrameLayout boxContainer;
+
 
 
     @Override
@@ -35,8 +42,30 @@ public class MainActivity extends AppCompatActivity {
 
 
         ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        setContentView(binding.getRoot()); // activity_main | sets R to that context
 
+        RecyclerView recyclerView = findViewById(R.id.save_file_recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        List<SaveFile> itemList = new ArrayList<>();
+        for (int i = 1; i < 10; i++) {
+            itemList.add(new SaveFile("Item " + i, "Description " + i));
+        }
+
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(itemList, item -> {
+            // Handle item click
+            Intent intent = new Intent(MainActivity.this, SaveFileInfoActivity.class);
+            intent.putExtra("title", item.getTitle());
+            intent.putExtra("description", item.getDescription());
+            intent.putExtra("actionBarTitle", item.getTitle());
+
+            startActivity(intent);
+        });
+
+
+        recyclerView.setAdapter(adapter);
+
+        if (true) {return;}
         setSupportActionBar(binding.appBarMain.toolbar);
         if (binding.appBarMain.fab != null) {
             binding.appBarMain.fab.setOnClickListener(view -> {

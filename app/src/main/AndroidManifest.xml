@@ -12,6 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.InkCompiler"
         tools:targetApi="31">
+
+
+
+        <activity
+            android:parentActivityName=".MainActivity"
+            android:name="com.fourthmach.inkcompiler.SaveFileInfoActivity"
+            android:label="u should not be seeing ts, ts pmo sm icl">
+        </activity>
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
