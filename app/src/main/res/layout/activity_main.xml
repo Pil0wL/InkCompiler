@@ -7,7 +7,7 @@ across the layout configurations
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--
+
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
@@ -21,12 +21,6 @@ across the layout configurations
             android:layout_height="match_parent" />
 
     </androidx.drawerlayout.widget.DrawerLayout>
-    -->
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/save_file_recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 
 
 </FrameLayout>
