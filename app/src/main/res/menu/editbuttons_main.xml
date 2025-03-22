@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/resize" android:title="Resize" />
+    <item android:id="@+id/textEdit" android:title="Text Edit" />
+    <item android:id="@+id/saveScreen" android:title="Save Screen" />
+    <item android:id="@+id/moveElement" android:title="Move Element" />
+    <item android:id="@+id/multiSelect" android:title="Multi-Select" />
+</menu>
