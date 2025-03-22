@@ -7,6 +7,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -40,18 +45,15 @@ public class MainActivity extends AppCompatActivity {
             itemList.add(new SaveFile("Item " + i, "Description " + i));
         }
 
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(itemList, item -> {
-            // Handle item click
+
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(itemList, save_file -> {
             Intent intent = new Intent(MainActivity.this, SaveFileInfoActivity.class);
-            intent.putExtra("title", item.getTitle());
-            intent.putExtra("description", item.getDescription());
-            intent.putExtra("actionBarTitle", item.getTitle());
+            intent.putExtra("save_file", save_file);
 
             startActivity(intent);
         });
-
-
         recyclerView.setAdapter(adapter);
+
 
         /*
         setSupportActionBar(binding.appBarMain.toolbar);
