@@ -49,6 +49,7 @@ public class SaveFileInfoActivity extends AppCompatActivity {
 
 
                 startActivity(intent);
+                finish();
             }
         });
     }
