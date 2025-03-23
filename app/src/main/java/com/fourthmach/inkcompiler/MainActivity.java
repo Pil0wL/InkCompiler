@@ -7,6 +7,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
@@ -54,6 +55,18 @@ public class MainActivity extends AppCompatActivity {
         });
         recyclerView.setAdapter(adapter);
 
+
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                // Exit the app when the back button is pressed in Activity A
+                finishAffinity(); // Close all activities in the task
+            }
+        };
+
+        // Add the callback to the OnBackPressedDispatcher
+        getOnBackPressedDispatcher().addCallback(this, callback);
 
         /*
         setSupportActionBar(binding.appBarMain.toolbar);
@@ -136,4 +149,5 @@ public class MainActivity extends AppCompatActivity {
         // Add the box to the container
         boxContainer.addView(box);
     }
+
 }

@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#eb4034"
-    android:layout_marginTop="?attr/actionBarSize"
-    android:padding="10dp">
+    android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/menuButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Show Menu"
-        android:layout_margin="16dp" />
-</LinearLayout>
+    <include
+        android:id="@+id/editing_main_overlay"
+        layout="@layout/editing_main_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</FrameLayout>
+

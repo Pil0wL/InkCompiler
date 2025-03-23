@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="16dp">
+
+    <ImageView
+
+        android:id="@+id/editmenu_arrowButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="TODO"
+        android:src="@drawable/editing_buttons_up"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/editmenu_buttonScrollView"
+        />
+
+    <HorizontalScrollView
+        android:id="@+id/editmenu_buttonScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp">
+            <ImageButton
+                android:id="@+id/editmenu_home_button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Button 1"
+
+                android:background="@drawable/home_button_bg"
+                android:src="@drawable/home_button"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:layout_marginEnd="8dp"  />
+            <Button
+                android:id="@+id/editmenu_add_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:layout_marginEnd="8dp" />
+            <Button
+                android:id="@+id/editmenu_remove_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Remove"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:layout_marginEnd="8dp" />
+            </LinearLayout>
+
+        <!-- Pre-defined Buttons -->
+
+    </HorizontalScrollView>
+
+    <ImageView
+        android:id="@+id/editors_arrowButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="TODO"
+        android:src="@drawable/editing_buttons_down"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/editors_buttonScrollView"
+        />
+    <!-- Scrollable Buttons (Initially Hidden) -->
+    <HorizontalScrollView
+        android:id="@+id/editors_buttonScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_alignParentBottom="true"
+        >
+
+        <LinearLayout
+            android:id="@+id/editors_buttonContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:contentDescription="Container for action buttons"
+            />
+
+            <!-- Pre-defined Buttons -->
+
+    </HorizontalScrollView>
+
+
+
+</RelativeLayout>
