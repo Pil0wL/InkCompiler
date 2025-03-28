@@ -14,7 +14,10 @@ across the layout configurations
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
+        android:background="@color/white"
+        android:backgroundTint="@color/white"
+        android:fitsSystemWindows="true"
+        android:visibility="visible">
 
         <include
             android:id="@+id/app_bar_main"

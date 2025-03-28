@@ -1,62 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="16dp">
 
     <ImageView
 
         android:id="@+id/editmenu_arrowButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/editmenu_buttonScrollView"
+        android:layout_marginTop="0dp"
         android:contentDescription="TODO"
-        android:src="@drawable/editing_buttons_up"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/editmenu_buttonScrollView"
-        />
+        android:src="@drawable/editing_buttons_up" />
 
     <HorizontalScrollView
         android:id="@+id/editmenu_buttonScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        >
+        android:layout_marginTop="10dp"
+        tools:foregroundGravity="center_horizontal">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:orientation="horizontal"
             android:padding="8dp">
+
             <ImageButton
                 android:id="@+id/editmenu_home_button"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Button 1"
+                android:layout_marginEnd="8dp"
 
                 android:background="@drawable/home_button_bg"
-                android:src="@drawable/home_button"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
-                android:layout_marginEnd="8dp"  />
+                android:src="@drawable/home_button"
+                android:text="Button 1" />
+
             <Button
                 android:id="@+id/editmenu_add_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Add"
+                android:layout_marginEnd="8dp"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
-                android:layout_marginEnd="8dp" />
+                android:text="Add" />
+
             <Button
                 android:id="@+id/editmenu_remove_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Remove"
+                android:layout_marginEnd="8dp"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
-                android:layout_marginEnd="8dp" />
-            </LinearLayout>
+                android:text="Remove" />
+        </LinearLayout>
 
         <!-- Pre-defined Buttons -->
 
@@ -66,33 +70,29 @@
         android:id="@+id/editors_arrowButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="TODO"
-        android:src="@drawable/editing_buttons_down"
-        android:layout_centerHorizontal="true"
         android:layout_above="@+id/editors_buttonScrollView"
-        />
+        android:layout_centerHorizontal="true"
+        android:contentDescription="TODO"
+        android:src="@drawable/editing_buttons_down" />
     <!-- Scrollable Buttons (Initially Hidden) -->
     <HorizontalScrollView
         android:id="@+id/editors_buttonScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:layout_alignParentBottom="true"
-        >
+        android:layout_marginBottom="8dp">
 
         <LinearLayout
             android:id="@+id/editors_buttonContainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="8dp"
             android:contentDescription="Container for action buttons"
-            />
+            android:orientation="horizontal"
+            android:padding="8dp" />
 
-            <!-- Pre-defined Buttons -->
+        <!-- Pre-defined Buttons -->
 
     </HorizontalScrollView>
-
 
 
 </RelativeLayout>
