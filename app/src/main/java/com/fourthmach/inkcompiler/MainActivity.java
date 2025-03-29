@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
         List<SaveFile> itemList = new ArrayList<>();
         for (int i = 1; i < 10; i++) {
-            itemList.add(new SaveFile("Item " + i, "Description " + i));
+            itemList.add(new SaveFile("Item " + i, "Description " + i, 0.0f, 0.0f));
         }
 
 
