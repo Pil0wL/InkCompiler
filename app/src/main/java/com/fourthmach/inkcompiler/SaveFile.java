@@ -83,7 +83,7 @@ public class SaveFile implements Parcelable {
         dest.writeFloat(y); // Write Y position
     }
 
-    // Function to save the note data (including X and Y) using SharedPreferences
+    // Function to save the note data (including X and Y) using SharedPreferences.
     public void saveNote(android.content.Context context) {
         android.content.SharedPreferences sharedPreferences = context.getSharedPreferences("NotesData", android.content.Context.MODE_PRIVATE);
         android.content.SharedPreferences.Editor editor = sharedPreferences.edit();

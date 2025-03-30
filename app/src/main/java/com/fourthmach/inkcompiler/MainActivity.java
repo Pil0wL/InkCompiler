@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
             View box = getLayoutInflater().inflate(R.layout.draggable_box, boxContainer, false);
 
 
-            // Set up touch listener to make the box draggable
+            // Set up touch listener to make the box draggable.
             box.setOnTouchListener(new View.OnTouchListener() {
                 private float dX, dY;
 
