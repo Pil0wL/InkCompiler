@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
     private FrameLayout boxContainer;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,32 +40,35 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.save_file_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        // Load the saved note from SharedPreferences
+        SaveFile savedNote = SaveFile.loadSavedNote(this);
+
         List<SaveFile> itemList = new ArrayList<>();
         for (int i = 1; i < 10; i++) {
-            itemList.add(new SaveFile("Item " + i, "Description " + i, 0.0f, 0.0f));
-        }
-
-
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(itemList, save_file -> {
-            Intent intent = new Intent(MainActivity.this, SaveFileInfoActivity.class);
-            intent.putExtra("save_file", save_file);
-
-            startActivity(intent);
-        });
-        recyclerView.setAdapter(adapter);
-
-
-
-        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
-            @Override
-            public void handleOnBackPressed() {
-                // Exit the app when the back button is pressed in Activity A
-                finishAffinity(); // Close all activities in the task
+            if (savedNote != null && savedNote.getTitle() != null && !savedNote.getTitle().isEmpty()) {
+                itemList.add(savedNote);
             }
-        };
 
-        // Add the callback to the OnBackPressedDispatcher
-        getOnBackPressedDispatcher().addCallback(this, callback);
+
+            RecyclerViewAdapter adapter = new RecyclerViewAdapter(itemList, save_file -> {
+                Intent intent = new Intent(MainActivity.this, SaveFileInfoActivity.class);
+                intent.putExtra("save_file", save_file);
+
+                startActivity(intent);
+            });
+            recyclerView.setAdapter(adapter);
+
+
+            OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+                @Override
+                public void handleOnBackPressed() {
+                    // Exit the app when the back button is pressed in Activity A
+                    finishAffinity(); // Close all activities in the task
+                }
+            };
+
+            // Add the callback to the OnBackPressedDispatcher
+            getOnBackPressedDispatcher().addCallback(this, callback);
 
         /*
         setSupportActionBar(binding.appBarMain.toolbar);
@@ -107,47 +109,48 @@ public class MainActivity extends AppCompatActivity {
             Log.e("MainActivity", "boxContainer is null! Check your included layout file.");
         }
          */
+        }
     }
 
 
-    private void addDraggableBox() {
-        // Inflate the draggable box layout
-        View box = getLayoutInflater().inflate(R.layout.draggable_box, boxContainer, false);
+        private void addDraggableBox () {
+            // Inflate the draggable box layout
+            View box = getLayoutInflater().inflate(R.layout.draggable_box, boxContainer, false);
 
 
-        // Set up touch listener to make the box draggable
-        box.setOnTouchListener(new View.OnTouchListener() {
-            private float dX, dY;
+            // Set up touch listener to make the box draggable
+            box.setOnTouchListener(new View.OnTouchListener() {
+                private float dX, dY;
 
-            @Override
-            public boolean onTouch(View view, MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        // Record the initial touch position
-                        dX = view.getX() - event.getRawX();
-                        dY = view.getY() - event.getRawY();
-                        break;
-                    case MotionEvent.ACTION_MOVE:
-                        // Move the view with the touch
-                        view.animate()
-                                .x(event.getRawX() + dX)
-                                .y(event.getRawY() + dY)
-                                .setDuration(0)
-                                .start();
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        // Call performClick() when a click is detected
-                        view.performClick();
-                        break;
-                    default:
-                        return false;
+                @Override
+                public boolean onTouch(View view, MotionEvent event) {
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_DOWN:
+                            // Record the initial touch position
+                            dX = view.getX() - event.getRawX();
+                            dY = view.getY() - event.getRawY();
+                            break;
+                        case MotionEvent.ACTION_MOVE:
+                            // Move the view with the touch
+                            view.animate()
+                                    .x(event.getRawX() + dX)
+                                    .y(event.getRawY() + dY)
+                                    .setDuration(0)
+                                    .start();
+                            break;
+                        case MotionEvent.ACTION_UP:
+                            // Call performClick() when a click is detected
+                            view.performClick();
+                            break;
+                        default:
+                            return false;
+                    }
+                    return true;
                 }
-                return true;
-            }
-        });
+            });
 
-        // Add the box to the container
-        boxContainer.addView(box);
+            // Add the box to the container
+            boxContainer.addView(box);
+        }
+
     }
-
-}
