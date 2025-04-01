@@ -5,6 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/post_it"
+    android:backgroundTint="@color/post_it"
     android:padding="16dp">
 
     <ImageView
@@ -48,6 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
+                android:backgroundTint="@color/Post_it_brown"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
                 android:text="Add" />
@@ -57,6 +60,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
+                android:backgroundTint="@color/Post_it_brown"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
                 android:text="Remove" />

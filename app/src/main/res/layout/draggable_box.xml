@@ -3,7 +3,7 @@
     android:id="@+id/draggable_box"
     android:layout_width="100dp"
     android:layout_height="100dp"
-    android:background="@color/post_it"
+    android:background="@color/post_it_purple"
     android:orientation="vertical"
     android:padding="8dp">
 

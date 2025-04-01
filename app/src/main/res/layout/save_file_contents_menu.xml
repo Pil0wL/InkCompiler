@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="?attr/actionBarSize"
-    android:background="@color/post_it_purple"
+    android:background="@color/post_it"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="16dp">
@@ -15,6 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Title"
+        android:textColor="@color/black"
         android:textSize="128dp"
         android:textStyle="bold" />
 
@@ -23,6 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Description"
+        android:textColor="@color/pencil_lead"
         android:textSize="18sp" />
 
     <Button
@@ -30,6 +32,7 @@
         android:layout_width="241dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:backgroundTint="@color/Post_it_brown"
         android:text="Edit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

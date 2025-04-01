@@ -2,6 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/post_it"
+    android:backgroundTint="@color/post_it"
     android:gravity="fill_vertical"
     android:orientation="vertical"
     android:padding="32dp">
@@ -10,13 +12,21 @@
         android:id="@+id/savefile_displaytitel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="8dp"
         android:text="Item Title"
-        android:textSize="60sp" />
+        android:textColor="@color/black"
+        android:textSize="48sp" />
 
     <TextView
         android:id="@+id/savefile_discription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginRight="8dp"
         android:text="Item Description"
-        android:textSize="20sp" />
+        android:textColor="@color/pencil_lead"
+        android:textSize="16sp" />
 </LinearLayout>

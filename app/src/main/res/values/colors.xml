@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="post_it">#FEFF9C</color>
     <color name="post_it_purple">#D5B3FF</color>
+    <color name="Post_it_brown" >#92623a</color>
+    <color name="pencil_lead">#5C6274</color>
 </resources>
