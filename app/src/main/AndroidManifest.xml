@@ -6,26 +6,23 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/inkcompiler_logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/inkcompiler_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.InkCompiler"
         tools:targetApi="31">
-
-
-
         <activity
-            android:parentActivityName=".MainActivity"
-            android:name="com.fourthmach.inkcompiler.SaveFileInfoActivity"
-            android:label="u should not be seeing ts, ts pmo sm icl">
-        </activity>
-
+            android:name=".SettingsActivity"
+            android:exported="false" />
         <activity
-            android:parentActivityName=".MainActivity"
-            android:name="com.fourthmach.inkcompiler.EditingFileInfoActivity"
-            android:label="jaaja">
-        </activity>
+            android:name=".SaveFileInfoActivity"
+            android:label="u should not be seeing ts, ts pmo sm icl"
+            android:parentActivityName=".MainActivity"></activity>
+        <activity
+            android:name=".EditingFileInfoActivity"
+            android:label="jaaja"
+            android:parentActivityName=".MainActivity"></activity>
         <activity
             android:name=".MainActivity"
             android:exported="true"

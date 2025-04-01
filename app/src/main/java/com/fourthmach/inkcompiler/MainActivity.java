@@ -119,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
         box.setOnTouchListener(new View.OnTouchListener() {
             private float dX, dY;
 
+
             @Override
             public boolean onTouch(View view, MotionEvent event) {
                 switch (event.getAction()) {
@@ -126,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
                         // Record the initial touch position
                         dX = view.getX() - event.getRawX();
                         dY = view.getY() - event.getRawY();
+
                         break;
                     case MotionEvent.ACTION_MOVE:
                         // Move the view with the touch
