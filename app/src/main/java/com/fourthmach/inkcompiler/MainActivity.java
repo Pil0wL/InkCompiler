@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private FrameLayout boxContainer;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
             if (savedNote != null && savedNote.getTitle() != null && !savedNote.getTitle().isEmpty()) {
                 itemList.add(savedNote);
             }
-
 
             RecyclerViewAdapter adapter = new RecyclerViewAdapter(itemList, save_file -> {
                 Intent intent = new Intent(MainActivity.this, SaveFileInfoActivity.class);
@@ -113,44 +113,44 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-        private void addDraggableBox () {
-            // Inflate the draggable box layout
-            View box = getLayoutInflater().inflate(R.layout.draggable_box, boxContainer, false);
+    private void addDraggableBox() {
+        // Inflate the draggable box layout
+        View box = getLayoutInflater().inflate(R.layout.draggable_box, boxContainer, false);
 
 
-            // Set up touch listener to make the box draggable.
-            box.setOnTouchListener(new View.OnTouchListener() {
-                private float dX, dY;
+        // Set up touch listener to make the box draggable
+        box.setOnTouchListener(new View.OnTouchListener() {
+            private float dX, dY;
 
-                @Override
-                public boolean onTouch(View view, MotionEvent event) {
-                    switch (event.getAction()) {
-                        case MotionEvent.ACTION_DOWN:
-                            // Record the initial touch position
-                            dX = view.getX() - event.getRawX();
-                            dY = view.getY() - event.getRawY();
-                            break;
-                        case MotionEvent.ACTION_MOVE:
-                            // Move the view with the touch
-                            view.animate()
-                                    .x(event.getRawX() + dX)
-                                    .y(event.getRawY() + dY)
-                                    .setDuration(0)
-                                    .start();
-                            break;
-                        case MotionEvent.ACTION_UP:
-                            // Call performClick() when a click is detected
-                            view.performClick();
-                            break;
-                        default:
-                            return false;
-                    }
-                    return true;
+            @Override
+            public boolean onTouch(View view, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        // Record the initial touch position
+                        dX = view.getX() - event.getRawX();
+                        dY = view.getY() - event.getRawY();
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        // Move the view with the touch
+                        view.animate()
+                                .x(event.getRawX() + dX)
+                                .y(event.getRawY() + dY)
+                                .setDuration(0)
+                                .start();
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        // Call performClick() when a click is detected
+                        view.performClick();
+                        break;
+                    default:
+                        return false;
                 }
-            });
+                return true;
+            }
+        });
 
-            // Add the box to the container
-            boxContainer.addView(box);
-        }
-
+        // Add the box to the container
+        boxContainer.addView(box);
     }
+
+}

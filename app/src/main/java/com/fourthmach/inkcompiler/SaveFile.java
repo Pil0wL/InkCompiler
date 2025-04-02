@@ -6,8 +6,8 @@ import android.os.Parcelable;
 public class SaveFile implements Parcelable {
     private String title;
     private String description;
-    private float x; // X position of the note
-    private float y; // Y position of the note
+    private float x;
+    private float y;
 
     // Constructor
     public SaveFile(String title, String description, float x, float y) {
@@ -54,9 +54,8 @@ public class SaveFile implements Parcelable {
     protected SaveFile(Parcel in) {
         title = in.readString();
         description = in.readString();
-        x = in.readFloat(); // Read X position
-        y = in.readFloat(); // Read Y position
-
+        x = in.readFloat();
+        y = in.readFloat();
     }
     public static final Creator<SaveFile> CREATOR = new Creator<SaveFile>() {
         @Override
@@ -79,10 +78,9 @@ public class SaveFile implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(title);
         dest.writeString(description);
-        dest.writeFloat(x); // Write X position
-        dest.writeFloat(y); // Write Y position
+        dest.writeFloat(x);
+        dest.writeFloat(y);
     }
-
     // Function to save the note data (including X and Y) using SharedPreferences.
     public void saveNote(android.content.Context context) {
         android.content.SharedPreferences sharedPreferences = context.getSharedPreferences("NotesData", android.content.Context.MODE_PRIVATE);
@@ -95,7 +93,6 @@ public class SaveFile implements Parcelable {
 
         editor.apply(); // Save data asynchronously
     }
-
     // Function to load a saved note (static method)
     public static SaveFile loadSavedNote(android.content.Context context) {
         android.content.SharedPreferences sharedPreferences = context.getSharedPreferences("NotesData", android.content.Context.MODE_PRIVATE);
@@ -108,3 +105,7 @@ public class SaveFile implements Parcelable {
         return new SaveFile(title, description, x, y);
     }
 }
+
+
+
+
