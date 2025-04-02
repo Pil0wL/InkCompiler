@@ -42,7 +42,9 @@ public class DraggableBoxContainer {
         // Set a unique ID
         newBox.setId(View.generateViewId());
 
-        bindDragListener(draggableboxcontainer, newBox);
+        if (SettingValues.isMovingElement) {
+            bindDragListener(draggableboxcontainer, newBox);
+        }
 
         // Add to G
         draggableboxcontainer.addView(newBox);
@@ -53,7 +55,6 @@ public class DraggableBoxContainer {
     // Generic function to bind a draggable listener
     @SuppressLint("ClickableViewAccessibility")
     public static void bindDragListener(FrameLayout draggableboxcontainer, TextView view) {
-        view.bringToFront();
         view.setOnTouchListener(new View.OnTouchListener() {
             float dX, dY, startX, startY;
             boolean isMoving = false;
