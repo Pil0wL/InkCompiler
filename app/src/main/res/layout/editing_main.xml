@@ -4,6 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+    <include
+        android:id="@+id/editing_main_draggablecontainer"
+        layout="@layout/editing_main_draggablecontainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
     <include
         android:id="@+id/editing_main_overlay"
         layout="@layout/editing_main_overlay"
