@@ -23,7 +23,7 @@
 
         <activity
             android:parentActivityName=".MainActivity"
-            android:name="com.fourthmach.inkcompiler.EditingFileInfoActivity"
+            android:name="com.fourthmach.inkcompiler.editingmenuclasses.EditingFileInfoActivity"
             android:label="jaaja">
         </activity>
         <activity

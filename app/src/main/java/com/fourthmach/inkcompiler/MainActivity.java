@@ -41,9 +41,15 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.save_file_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        SaveFile savedNote = SaveFile.loadSavedNote(this);
         List<SaveFile> itemList = new ArrayList<>();
         for (int i = 1; i < 10; i++) {
-            itemList.add(new SaveFile("Item " + i, "Description " + i));
+            itemList.add(new SaveFile("Item " + i, "Description " + i, 0.2f, 0.41f));
+            /* // ready to be implemented
+            if (savedNote != null && savedNote.getTitle() != null && !savedNote.getTitle().isEmpty()) {
+                itemList.add(savedNote);
+            }
+            */
         }
 
 
@@ -54,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
         recyclerView.setAdapter(adapter);
-
 
 
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
