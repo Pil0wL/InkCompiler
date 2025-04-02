@@ -50,6 +50,7 @@ public class EditingFileInfoActivity extends AppCompatActivity {
             @SuppressLint("ClickableViewAccessibility")
             @Override
             public void onClick(View v) {
+                SettingValues.isMovingElement = false;
                 for (int i = 0; i < maindraggableboxcontainer.getChildCount(); i++) {
                     View child = maindraggableboxcontainer.getChildAt(i);
                     child.setOnTouchListener(null);
@@ -91,6 +92,7 @@ public class EditingFileInfoActivity extends AppCompatActivity {
             @SuppressLint("ClickableViewAccessibility")
             @Override
             public void onClick(View v) {
+                SettingValues.isMovingElement = true;
                 for (int i = 0; i < maindraggableboxcontainer.getChildCount(); i++) {
                     TextView child = (TextView) maindraggableboxcontainer.getChildAt(i);
                     DraggableBoxContainer.bindDragListener(maindraggableboxcontainer, child);
