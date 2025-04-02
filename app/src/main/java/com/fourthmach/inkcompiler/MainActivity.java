@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // Load the saved note from SharedPreferences
-        SaveFile savedNote = SaveFile.loadSavedNote(this);
+        SaveFile savedNote = SaveFile.loadSavedNote(this, "Untitled");
 
         List<SaveFile> itemList = new ArrayList<>();
         for (int i = 1; i < 10; i++) {

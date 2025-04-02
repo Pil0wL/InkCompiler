@@ -2,6 +2,8 @@ package com.fourthmach.inkcompiler;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import java.util.HashSet;
+import java.util.Set;
 
 public class SaveFile implements Parcelable {
     private String title;
@@ -86,21 +88,35 @@ public class SaveFile implements Parcelable {
         android.content.SharedPreferences sharedPreferences = context.getSharedPreferences("NotesData", android.content.Context.MODE_PRIVATE);
         android.content.SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        editor.putString("noteTitle", title);
-        editor.putString("noteDescription", description);
-        editor.putFloat("noteX", x);
-        editor.putFloat("noteY", y);
+        // Ensure the note has a unique ID
+        String noteId = "Note_" + title.hashCode(); // Using hashcode as a simple unique ID
+
+        editor.putString(noteId + "noteTitle", title);
+        editor.putString(noteId + "noteDescription", description);
+        editor.putFloat(noteId + "noteX", x);
+        editor.putFloat(noteId + "noteY", y);
+
+        // Store the note ID in a list of saved notes
+        Set<String> noteIds = sharedPreferences.getStringSet("SavedNotes", new HashSet<>());
+        noteIds.add(noteId);
+        editor.putStringSet("SavedNotes", noteIds);
+
 
         editor.apply(); // Save data asynchronously
     }
     // Function to load a saved note (static method)
-    public static SaveFile loadSavedNote(android.content.Context context) {
+    public static SaveFile loadSavedNote(android.content.Context context, String noteTitle) {
         android.content.SharedPreferences sharedPreferences = context.getSharedPreferences("NotesData", android.content.Context.MODE_PRIVATE);
 
-        String title = sharedPreferences.getString("noteTitle", "Untitled");
-        String description = sharedPreferences.getString("noteDescription", "");
-        float x = sharedPreferences.getFloat("noteX", 0.0f);
-        float y = sharedPreferences.getFloat("noteY", 0.0f);
+        String noteId = "Note_" + noteTitle.hashCode(); // Retrieve the same ID format
+
+        String title = sharedPreferences.getString(noteId + "_Title", null);
+        if (title == null) return null; // Note not found
+
+
+        String description = sharedPreferences.getString(noteId+ "noteDescription", "");
+        float x = sharedPreferences.getFloat(noteId + "noteX", 0.0f);
+        float y = sharedPreferences.getFloat(noteId + "noteY", 0.0f);
 
         return new SaveFile(title, description, x, y);
     }
