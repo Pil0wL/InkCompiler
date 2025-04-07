@@ -1,17 +1,33 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/draggable_box"
-    android:layout_width="100dp"
-    android:layout_height="100dp"
-    android:background="@color/purple_200"
-    android:orientation="vertical"
-    android:padding="8dp">
+<com.fourthmach.inkcompiler.CustomFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
-    <!-- Example content inside the box -->
-    <TextView
-        android:layout_width="wrap_content"
+    android:layout_width="50dp"
+    android:layout_height="wrap_content"
+    >
+
+    <EditText xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/childdraggableboxedittext"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/drag_me"
-        android:textColor="@color/white"/>
+        android:background="@android:color/transparent"
+        android:inputType="textMultiLine|textCapSentences"
+        android:gravity="top|start"
+        android:cursorVisible="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:minLines="1"
+        android:scrollHorizontally="false"
+        android:overScrollMode="never"
+        android:textSize="16sp"
+        android:padding="8dp"
+        android:hint="Tap to edit"
+        />
 
-</LinearLayout>
+
+    <View
+        android:id="@+id/transparentClickView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:clickable="true"
+        android:focusable="true" />
+</com.fourthmach.inkcompiler.CustomFrameLayout>

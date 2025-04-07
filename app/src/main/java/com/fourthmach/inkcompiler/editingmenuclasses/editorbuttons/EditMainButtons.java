@@ -1,16 +1,18 @@
-package com.fourthmach.inkcompiler.editingmenuclasses;
+package com.fourthmach.inkcompiler.editingmenuclasses.editorbuttons;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.fourthmach.inkcompiler.MainActivity;
 import com.fourthmach.inkcompiler.R;
+import com.fourthmach.inkcompiler.editingmenuclasses.DraggableBoxContainer;
 
 public class EditMainButtons {
 
@@ -25,14 +27,14 @@ public class EditMainButtons {
         this.currentActivity = currentActivity;
         this.overlay = overlay;
 
-        bindEditorButtons();
+        CreateEditorButtons();
         bindEditMenuButtons();
 
         AddButton = overlay.findViewById(R.id.editmenu_add_button);
     }
 
     public Button[] editor_buttons;
-    private void bindEditorButtons() {
+    private void CreateEditorButtons() {
         editor_buttons = new Button[editButtonLabels.length]; // List to store button references
 
         LinearLayout editor_buttonContainer = overlay.findViewById(R.id.editors_buttonContainer);
@@ -66,14 +68,6 @@ public class EditMainButtons {
                 editor_buttonContainer.addView(button);
             }
         }
-        editor_buttons[0].setText("Updated Button 1");
-
-        editor_buttons[1].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(currentActivity, ((Button) v).getText() + " jaja", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
 
@@ -93,5 +87,6 @@ public class EditMainButtons {
             }
         });
     }
+
 
 }
