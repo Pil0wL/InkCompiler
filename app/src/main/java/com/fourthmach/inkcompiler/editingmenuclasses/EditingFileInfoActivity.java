@@ -1,25 +1,33 @@
 package com.fourthmach.inkcompiler.editingmenuclasses;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.fourthmach.inkcompiler.R;
-
-import org.w3c.dom.Text;
+import com.fourthmach.inkcompiler.editingmenuclasses.editorbuttons.*;
 
 public class EditingFileInfoActivity extends AppCompatActivity {
 
 
+    private static int MIN_WIDTH = 50;
 
+    private RelativeLayout overlay;
+    private FrameLayout parentBoxForHolder;
+    private FrameLayout containerFor_draggableBox;
+
+    private Activity selfreference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,16 +40,149 @@ public class EditingFileInfoActivity extends AppCompatActivity {
 
         android.content.Intent current_intent = getIntent();
 
-        RelativeLayout overlay = findViewById(R.id.editing_main_overlay);
-        FrameLayout draggableboxcontainer = findViewById(R.id.editing_main_draggablecontainer);
-        FrameLayout maindraggableboxcontainer = draggableboxcontainer.findViewById(R.id.maindraggableboxcontainer);
+        overlay = findViewById(R.id.editing_main_overlay);
+        parentBoxForHolder = findViewById(R.id.editing_main_draggablecontainer);
+        containerFor_draggableBox = parentBoxForHolder.findViewById(R.id.maindraggableboxcontainer);
+        selfreference = this;
 
 
         new UpDownArrows(overlay);
         EditMainButtons buttons = new EditMainButtons(this, overlay);
-        DraggableBoxContainer dbc_functions = new DraggableBoxContainer(this, maindraggableboxcontainer);
+        DraggableBoxContainer draggableBoxes_controller = new DraggableBoxContainer(this, parentBoxForHolder, containerFor_draggableBox);
 
-        buttons.AddButton.setOnClickListener(v -> dbc_functions.addNewBox());
+
+        buttons.AddButton.setOnClickListener(v -> draggableBoxes_controller.addNewBox());
+
+
+        // Resize
+        buttons.editor_buttons[0].setOnClickListener(new View.OnClickListener() {
+
+            @SuppressLint("ClickableViewAccessibility")
+            @Override
+            public void onClick(View v) {
+                unbindAll();
+                for (int i = 0; i < containerFor_draggableBox.getChildCount(); i++) {
+                    FrameLayout child = (FrameLayout) containerFor_draggableBox.getChildAt(i);
+                    View clickDetector = child.findViewById(R.id.transparentClickView);
+                    clickDetector.setOnTouchListener(new View.OnTouchListener() {
+                        float initialX;
+                        float initialRawX;
+                        int initialWidth;
+                        boolean resizingLeft = false;
+                        boolean resizingRight = false;
+                        final int edgePadding = 40; // Sensitivity to edges (in pixels)
+
+                        @Override
+                        public boolean onTouch(View v, MotionEvent event) {
+
+                            switch (event.getActionMasked()) {
+                                case MotionEvent.ACTION_DOWN:
+                                    initialX = child.getX();
+                                    initialRawX = event.getRawX();
+                                    initialWidth = child.getWidth();
+
+                                    float touchX = event.getX();
+
+                                    if (touchX < edgePadding) {
+                                        resizingLeft = true;
+                                        return true;
+                                    } else if (touchX > child.getWidth() - edgePadding) {
+                                        resizingRight = true;
+                                        return true;
+                                    }
+                                    return false;
+
+                                case MotionEvent.ACTION_MOVE:
+                                    Log.d("TouchEvent", "Action: inside jaja");
+                                    float deltaX = event.getRawX() - initialRawX;
+
+                                    FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) child.getLayoutParams();
+
+                                    if (resizingRight) {
+                                        int newWidth = (int) (initialWidth + deltaX);
+                                        if (newWidth > MIN_WIDTH) {
+                                            params.width = newWidth;
+                                            child.setLayoutParams(params);
+                                        }
+                                    } else if (resizingLeft) {
+                                        int newWidth = (int) (initialWidth - deltaX);
+                                        float newX = initialX + deltaX;
+
+                                        if (newWidth > MIN_WIDTH) {
+                                            params.width = newWidth;
+                                            child.setX(newX);
+                                            child.setLayoutParams(params);
+                                        }
+                                    }
+                                    return true;
+
+                                case MotionEvent.ACTION_UP:
+
+                                    draggableBoxes_controller.expandGIfNeeded(child);
+                                case MotionEvent.ACTION_CANCEL:
+                                    resizingLeft = false;
+                                    resizingRight = false;
+                                    return false;
+                            }
+                            return false;
+                        }
+                    });
+                }
+
+
+            }
+
+        });
+
+        // text Edit
+        buttons.editor_buttons[1].setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("ClickableViewAccessibility")
+            @Override
+            public void onClick(View v) {
+                unbindAll();
+
+                SettingValues.isMovingElement = true;
+                for (int i = 0; i < containerFor_draggableBox.getChildCount(); i++) {
+                    FrameLayout child = (FrameLayout) containerFor_draggableBox.getChildAt(i);
+                    EditText childEditText = child.findViewById(R.id.childdraggableboxedittext);
+                    childEditText.bringToFront();
+
+                    childEditText.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Log.d("testing", "bwahg");
+                            childEditText.setCursorVisible(true);
+                            childEditText.setFocusable(true);
+                            childEditText.setFocusableInTouchMode(true);
+                            childEditText.requestFocus();
+                            childEditText.setKeyListener(new EditText(selfreference).getKeyListener());
+
+                            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                            if (imm != null) {
+                                imm.showSoftInput(childEditText, InputMethodManager.SHOW_IMPLICIT);
+                            }
+                        }
+                    });
+                    childEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                        @Override
+                        public void onFocusChange(View v, boolean hasFocus) {
+                            if (!hasFocus) {
+                                childEditText.setCursorVisible(false);
+                                childEditText.setFocusable(false);
+                                childEditText.setFocusableInTouchMode(false);
+
+                                childEditText.setLongClickable(false); // disables selection
+                                childEditText.setKeyListener(null);    // disables typing (important)
+                            }
+
+                            draggableBoxes_controller.expandGIfNeeded(child);
+                        }
+                    });
+                }
+            }
+        });
+
+        // Move Screen
         buttons.editor_buttons[2].setOnClickListener(new View.OnClickListener() {
             float lastTouchX, lastTouchY;
             boolean isDragging = false;
@@ -50,12 +191,9 @@ public class EditingFileInfoActivity extends AppCompatActivity {
             @SuppressLint("ClickableViewAccessibility")
             @Override
             public void onClick(View v) {
+                unbindAll();
                 SettingValues.isMovingElement = false;
-                for (int i = 0; i < maindraggableboxcontainer.getChildCount(); i++) {
-                    View child = maindraggableboxcontainer.getChildAt(i);
-                    child.setOnTouchListener(null);
-                }
-                draggableboxcontainer.setOnTouchListener(new View.OnTouchListener() {
+                parentBoxForHolder.setOnTouchListener(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
                         switch (event.getAction()) {
@@ -70,8 +208,8 @@ public class EditingFileInfoActivity extends AppCompatActivity {
                                     float dx = event.getRawX() - lastTouchX;
                                     float dy = event.getRawY() - lastTouchY;
 
-                                    maindraggableboxcontainer.setX(maindraggableboxcontainer.getX() + dx);
-                                    maindraggableboxcontainer.setY(maindraggableboxcontainer.getY() + dy);
+                                    containerFor_draggableBox.setX(containerFor_draggableBox.getX() + dx);
+                                    containerFor_draggableBox.setY(containerFor_draggableBox.getY() + dy);
 
                                     lastTouchX = event.getRawX();
                                     lastTouchY = event.getRawY();
@@ -88,20 +226,45 @@ public class EditingFileInfoActivity extends AppCompatActivity {
 
             }
         });
+
+        // Move Element
         buttons.editor_buttons[3].setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ClickableViewAccessibility")
             @Override
             public void onClick(View v) {
+                unbindAll();
+
                 SettingValues.isMovingElement = true;
-                for (int i = 0; i < maindraggableboxcontainer.getChildCount(); i++) {
-                    TextView child = (TextView) maindraggableboxcontainer.getChildAt(i);
-                    DraggableBoxContainer.bindDragListener(maindraggableboxcontainer, child);
+                for (int i = 0; i < containerFor_draggableBox.getChildCount(); i++) {
+                    FrameLayout child = (FrameLayout) containerFor_draggableBox.getChildAt(i);
+                    draggableBoxes_controller.bindDragListener(child);
                 }
-                draggableboxcontainer.setOnTouchListener(null);
             }
         });
     }
 
+
+    @SuppressLint("ClickableViewAccessibility")
+    private void unbindAll() {
+        parentBoxForHolder.setOnTouchListener(null);
+
+        for (int i = 0; i < containerFor_draggableBox.getChildCount(); i++) {
+            FrameLayout child = (FrameLayout) containerFor_draggableBox.getChildAt(i);
+
+            View clickDetector = child.findViewById(R.id.transparentClickView);
+            clickDetector.setOnTouchListener(null);
+            clickDetector.setOnClickListener(null);
+            clickDetector.setOnFocusChangeListener(null);
+            clickDetector.bringToFront();
+
+            EditText childEditText = child.findViewById(R.id.childdraggableboxedittext);
+            childEditText.setCursorVisible(false);
+            childEditText.setFocusable(false);
+            childEditText.setFocusableInTouchMode(false);
+            childEditText.setLongClickable(false); // disables selection
+            childEditText.setKeyListener(null);    // disables typing (important)
+        }
+    }
 
 
 
