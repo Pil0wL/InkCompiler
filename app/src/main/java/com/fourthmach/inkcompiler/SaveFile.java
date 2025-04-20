@@ -113,7 +113,6 @@ public class SaveFile implements Parcelable {
         String title = sharedPreferences.getString(noteId + "_Title", null);
         if (title == null) return null; // Note not found
 
-
         String description = sharedPreferences.getString(noteId+ "noteDescription", "");
         float x = sharedPreferences.getFloat(noteId + "noteX", 0.0f);
         float y = sharedPreferences.getFloat(noteId + "noteY", 0.0f);
