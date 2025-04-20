@@ -1,5 +1,9 @@
 package com.fourthmach.inkcompiler;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.Parcel;
 import android.os.Parcelable;
 import java.util.HashSet;
@@ -11,6 +15,11 @@ public class SaveFile implements Parcelable {
     private float x;
     private float y;
 
+    // Debounce handler
+    private transient Handler saveHandler = new Handler(Looper.getMainLooper());
+    private transient Runnable saveRunnable;
+    private static final long SAVE_DELAY_MS = 500; // Debounce delay in milliseconds
+
     // Constructor
     public SaveFile(String title, String description, float x, float y) {
         this.title = title;
@@ -19,40 +28,53 @@ public class SaveFile implements Parcelable {
         this.y = y;
     }
 
+    // Debounce autosave trigger
+    private void triggerDebouncedSave(Context context) {
+        if (saveRunnable != null) {
+            saveHandler.removeCallbacks(saveRunnable);
+        }
+
+        saveRunnable = () -> saveNote(context);
+        saveHandler.postDelayed(saveRunnable, SAVE_DELAY_MS);
+    }
+
     // Getters and Setters
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(String title, Context context) {
         this.title = title;
+        triggerDebouncedSave(context);
     }
+
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(String description, Context context) {
         this.description = description;
+        triggerDebouncedSave(context);
     }
-
     public float getX() {
         return x;
     }
 
-    public void setX(float x) {
+    public void setX(float x, Context context) {
         this.x = x;
+        triggerDebouncedSave(context);
     }
-
     public float getY() {
         return y;
     }
 
-    public void setY(float y) {
+    public void setY(float y, Context context) {
         this.y = y;
+        triggerDebouncedSave(context);
     }
 
-
+    // Parcelable
     protected SaveFile(Parcel in) {
         title = in.readString();
         description = in.readString();
@@ -84,7 +106,7 @@ public class SaveFile implements Parcelable {
         dest.writeFloat(y);
     }
     // Function to save the note data (including X and Y) using SharedPreferences.
-    public void saveNote(android.content.Context context) {
+    public void saveNote(Context context) {
         android.content.SharedPreferences sharedPreferences = context.getSharedPreferences("NotesData", android.content.Context.MODE_PRIVATE);
         android.content.SharedPreferences.Editor editor = sharedPreferences.edit();
 
@@ -105,12 +127,12 @@ public class SaveFile implements Parcelable {
         editor.apply(); // Save data asynchronously
     }
     // Function to load a saved note (static method)
-    public static SaveFile loadSavedNote(android.content.Context context, String noteTitle) {
+    public static SaveFile loadSavedNote(Context context, String noteTitle) {
         android.content.SharedPreferences sharedPreferences = context.getSharedPreferences("NotesData", android.content.Context.MODE_PRIVATE);
 
         String noteId = "Note_" + noteTitle.hashCode(); // Retrieve the same ID format
 
-        String title = sharedPreferences.getString(noteId + "_Title", null);
+        String title = sharedPreferences.getString(noteId + "noteTitle", null);
         if (title == null) return null; // Note not found
 
         String description = sharedPreferences.getString(noteId+ "noteDescription", "");
