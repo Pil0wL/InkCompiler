@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ListPreference
+        android:key="font_size"
+        android:title="Font Size"
+        android:summary="Choose default font size"
+        android:defaultValue="16"
+        android:entries="@array/font_sizes"
+        android:entryValues="@array/font_size_values" />
+
+    <ListPreference
+        android:key="font_family"
+        android:title="Font Family"
+        android:summary="Choose default font style"
+        android:defaultValue="sans-serif"
+        android:entries="@array/font_families"
+        android:entryValues="@array/font_family_values" />
+
+    <SwitchPreferenceCompat
+        android:key="default_bold"
+        android:title="Bold by default"
+        android:summary="New notes start with bold text" />
+
+    <SwitchPreferenceCompat
+        android:key="default_italic"
+        android:title="Italic by default"
+        android:summary="New notes start with italic text" />
+
+</PreferenceScreen>

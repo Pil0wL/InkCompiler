@@ -17,9 +17,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.fourthmach.inkcompiler.databinding.ActivityMainBinding;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -113,6 +111,5 @@ public class MainActivity extends AppCompatActivity {
         }
          */
     }
-
 
 }
