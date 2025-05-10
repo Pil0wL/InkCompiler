@@ -5,14 +5,13 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.fourthmach.inkcompiler.MainActivity;
 import com.fourthmach.inkcompiler.R;
-import com.fourthmach.inkcompiler.editingmenuclasses.DraggableBoxContainer;
+import com.fourthmach.inkcompiler.editingmenuclasses.EFIActivityInfo;
 
 public class EditMainButtons {
 
@@ -20,24 +19,24 @@ public class EditMainButtons {
     private static final String[] editButtonLabels = {"Resize", "Text Edit", "Move Screen", "Move Element", "Multi-Select"};
 
     private final Activity currentActivity;
-    private final RelativeLayout overlay;
+    private final RelativeLayout overlayButtonsContainer;
 
     public final Button AddButton;
-    public EditMainButtons(Activity currentActivity, RelativeLayout overlay) {
-        this.currentActivity = currentActivity;
-        this.overlay = overlay;
+    public EditMainButtons(EFIActivityInfo efiActivityInfo) {
+        this.currentActivity = efiActivityInfo.activity;
+        this.overlayButtonsContainer = efiActivityInfo.overlayButtonsContainer;
 
         CreateEditorButtons();
         bindEditMenuButtons();
 
-        AddButton = overlay.findViewById(R.id.editmenu_add_button);
+        AddButton = overlayButtonsContainer.findViewById(R.id.editmenu_add_button);
     }
 
     public Button[] editor_buttons;
     private void CreateEditorButtons() {
         editor_buttons = new Button[editButtonLabels.length]; // List to store button references
 
-        LinearLayout editor_buttonContainer = overlay.findViewById(R.id.editors_buttonContainer);
+        LinearLayout editor_buttonContainer = overlayButtonsContainer.findViewById(R.id.editors_buttonContainer);
         LayoutInflater inflater = LayoutInflater.from(currentActivity);
         {
             int i = 0;
@@ -73,13 +72,14 @@ public class EditMainButtons {
 
 
     private void bindEditMenuButtons() {
-        overlay.findViewById(R.id.editmenu_home_button).setOnClickListener(new View.OnClickListener() {
+        overlayButtonsContainer.findViewById(R.id.editmenu_home_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(currentActivity, MainActivity.class);
 
                 // Clear the back stack so Activity B and C are removed
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
                 // Start Activity A
                 currentActivity.startActivity(intent);
