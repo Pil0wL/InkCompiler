@@ -7,7 +7,7 @@
     android:clipToPadding="false">
 
     <!-- The container (G) that holds draggable boxes -->
-    <FrameLayout
+    <com.fourthmach.inkcompiler.editingmenuclasses.MainDraBoxContainer.MainDraBoxContainer
         android:id="@+id/maindraggableboxcontainer"
         android:layout_width="300dp"
         android:layout_height="300dp"
@@ -15,6 +15,6 @@
         android:layout_gravity="center"
         android:clipChildren="false"
         android:clipToPadding="false">
-    </FrameLayout>
+    </com.fourthmach.inkcompiler.editingmenuclasses.MainDraBoxContainer.MainDraBoxContainer>
 
 </FrameLayout>

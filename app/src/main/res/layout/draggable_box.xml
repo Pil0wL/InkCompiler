@@ -1,33 +1,51 @@
-<com.fourthmach.inkcompiler.CustomFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.fourthmach.inkcompiler.editingmenuclasses.enhanceddraggable.EnhancedDraggableLayout.EnhancedDraggableLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
-    android:layout_width="50dp"
-    android:layout_height="wrap_content"
+    android:layout_width="250dp"
+    android:layout_height="250dp"
     >
 
-    <EditText xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/childdraggableboxedittext"
+
+
+    <com.fourthmach.inkcompiler.editingmenuclasses.enhanceddraggable.RichTextRenderer.RichTextRenderer
+        android:id="@+id/dragboxRichTextRenderer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
+        android:layout_height="match_parent"
+        android:background="#009933"
+        />
+
+    <com.fourthmach.inkcompiler.editingmenuclasses.enhanceddraggable.EnhancedEditText.EnhancedEditText xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/dragboxMainEditTextView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#1a6b95cd"
         android:inputType="textMultiLine|textCapSentences"
         android:gravity="top|start"
-        android:cursorVisible="false"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
         android:minLines="1"
         android:scrollHorizontally="false"
         android:overScrollMode="never"
         android:textSize="16sp"
         android:padding="8dp"
-        android:hint="Tap to edit"
+        android:hint="this is where you would put the rich text"
+
+
+        android:longClickable="false"
+
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:cursorVisible="false"
         />
 
-
     <View
-        android:id="@+id/transparentClickView"
+        android:id="@+id/dragboxSelectedBorder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/transparent"
+        android:background="@drawable/selectedborder"
+        android:visibility="gone" />
+    <View
+        android:id="@+id/dragboxStandardClickDetector"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#1aff6600"
         android:clickable="true"
         android:focusable="true" />
-</com.fourthmach.inkcompiler.CustomFrameLayout>
+</com.fourthmach.inkcompiler.editingmenuclasses.enhanceddraggable.EnhancedDraggableLayout.EnhancedDraggableLayout>

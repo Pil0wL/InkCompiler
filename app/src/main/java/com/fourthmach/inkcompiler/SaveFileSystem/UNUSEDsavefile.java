@@ -1,18 +1,18 @@
-package com.fourthmach.inkcompiler;
+package com.fourthmach.inkcompiler.SaveFileSystem;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class SaveFile implements Parcelable {
+public class UNUSEDsavefile implements Parcelable {
     private String title;
     private String description;
     private float x;
     private float y;
 
     // Constructor
-    public SaveFile(String title, String description, float x, float y) {
+    public UNUSEDsavefile(String title, String description, float x, float y) {
         this.title = title;
         this.description = description;
         this.x = x;
@@ -53,21 +53,21 @@ public class SaveFile implements Parcelable {
     }
 
 
-    protected SaveFile(Parcel in) {
+    protected UNUSEDsavefile(Parcel in) {
         title = in.readString();
         description = in.readString();
         x = in.readFloat();
         y = in.readFloat();
     }
-    public static final Creator<SaveFile> CREATOR = new Creator<SaveFile>() {
+    public static final Creator<UNUSEDsavefile> CREATOR = new Creator<UNUSEDsavefile>() {
         @Override
-        public SaveFile createFromParcel(Parcel in) {
-            return new SaveFile(in);
+        public UNUSEDsavefile createFromParcel(Parcel in) {
+            return new UNUSEDsavefile(in);
         }
 
         @Override
-        public SaveFile[] newArray(int size) {
-            return new SaveFile[size];
+        public UNUSEDsavefile[] newArray(int size) {
+            return new UNUSEDsavefile[size];
         }
     };
 
@@ -105,7 +105,7 @@ public class SaveFile implements Parcelable {
         editor.apply(); // Save data asynchronously
     }
     // Function to load a saved note (static method)
-    public static SaveFile loadSavedNote(android.content.Context context, String noteTitle) {
+    public static UNUSEDsavefile loadSavedNote(android.content.Context context, String noteTitle) {
         android.content.SharedPreferences sharedPreferences = context.getSharedPreferences("NotesData", android.content.Context.MODE_PRIVATE);
 
         String noteId = "Note_" + noteTitle.hashCode(); // Retrieve the same ID format
@@ -118,6 +118,6 @@ public class SaveFile implements Parcelable {
         float x = sharedPreferences.getFloat(noteId + "noteX", 0.0f);
         float y = sharedPreferences.getFloat(noteId + "noteY", 0.0f);
 
-        return new SaveFile(title, description, x, y);
+        return new UNUSEDsavefile(title, description, x, y);
     }
 }
