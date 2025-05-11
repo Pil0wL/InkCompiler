@@ -18,9 +18,11 @@ public class UpDownArrows {
 
 
     boolean isEditorButtonsExpanded = false;
-    public UpDownArrows(RelativeLayout overlay) {
-        editor_arrowButton = overlay.findViewById(R.id.editors_arrowButton);
-        editor_buttonScrollView = overlay.findViewById(R.id.editors_buttonScrollView);
+    public UpDownArrows(EFIActivityInfo efiActivityInfo) {
+        RelativeLayout overlayButtonsContainer = efiActivityInfo.overlayButtonsContainer;
+
+        editor_arrowButton = overlayButtonsContainer.findViewById(R.id.editors_arrowButton);
+        editor_buttonScrollView = overlayButtonsContainer.findViewById(R.id.editors_buttonScrollView);
 
         isEditorButtonsExpanded = true;
         toggleEditorButtons();
@@ -32,8 +34,8 @@ public class UpDownArrows {
         });
 
 
-        editmenu_arrowButton = overlay.findViewById(R.id.editmenu_arrowButton);
-        editmenu_buttonScrollView = overlay.findViewById(R.id.editmenu_buttonScrollView);
+        editmenu_arrowButton = overlayButtonsContainer.findViewById(R.id.editmenu_arrowButton);
+        editmenu_buttonScrollView = overlayButtonsContainer.findViewById(R.id.editmenu_buttonScrollView);
 
         isEditMenuButtonsExpanded = true;
         toggleEditMenuButtons();

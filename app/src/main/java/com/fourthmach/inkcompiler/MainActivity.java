@@ -1,24 +1,25 @@
 package com.fourthmach.inkcompiler;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MotionEvent;
-import android.view.View;
+import android.os.Debug;
+import android.util.Log;
 import android.widget.FrameLayout;
 
 import androidx.activity.OnBackPressedCallback;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.fourthmach.inkcompiler.SaveFileSystem.SaveFileManager;
+import com.fourthmach.inkcompiler.SaveFileSystem.ShallowSaveFile;
 import com.fourthmach.inkcompiler.databinding.ActivityMainBinding;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        SaveFileManager.applicationContext = getApplicationContext();
 
         ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot()); // activity_main | sets R to that context
@@ -39,21 +41,12 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.save_file_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        //SaveFile savedNote = SaveFile.loadSavedNote(this);
-        List<SaveFile> itemList = new ArrayList<>();
-        for (int i = 1; i < 10; i++) {
-            itemList.add(new SaveFile("Item " + i, "Description " + i, 0.2f, 0.41f));
-            /* // ready to be implemented
-            if (savedNote != null && savedNote.getTitle() != null && !savedNote.getTitle().isEmpty()) {
-                itemList.add(savedNote);
-            }
-            */
-        }
 
-
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(itemList, save_file -> {
+        HashMap<String, ShallowSaveFile> loadedSaveFiles = SaveFileManager.loadAllFiles();
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(loadedSaveFiles, save_file -> {
             Intent intent = new Intent(MainActivity.this, SaveFileInfoActivity.class);
-            intent.putExtra("save_file", save_file);
+
+            SaveFileManager.beholdedShallowSaveFile = save_file;
 
             startActivity(intent);
         });
@@ -71,6 +64,14 @@ public class MainActivity extends AppCompatActivity {
         // Add the callback to the OnBackPressedDispatcher
         getOnBackPressedDispatcher().addCallback(this, callback);
 
+        findViewById(R.id.addsavefilebuttonindamenu).setOnClickListener(v -> {
+            ShallowSaveFile created = SaveFileManager.officiateNewSaveFile();
+            loadedSaveFiles.put(created.FileName, created);
+
+            adapter.updateData(loadedSaveFiles);
+        });
+
+        Log.d("MainActivity", "Loaded MainActivity!");
         /*
         setSupportActionBar(binding.appBarMain.toolbar);
         if (binding.appBarMain.fab != null) {
@@ -111,5 +112,6 @@ public class MainActivity extends AppCompatActivity {
         }
          */
     }
+
 
 }

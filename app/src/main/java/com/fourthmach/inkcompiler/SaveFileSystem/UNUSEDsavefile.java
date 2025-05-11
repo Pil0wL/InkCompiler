@@ -1,41 +1,22 @@
-package com.fourthmach.inkcompiler;
+package com.fourthmach.inkcompiler.SaveFileSystem;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.os.Handler;
-import android.os.Looper;
 import android.os.Parcel;
 import android.os.Parcelable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class SaveFile implements Parcelable {
+public class UNUSEDsavefile implements Parcelable {
     private String title;
     private String description;
     private float x;
     private float y;
 
-    // Debounce handler
-    private transient Handler saveHandler = new Handler(Looper.getMainLooper());
-    private transient Runnable saveRunnable;
-    private static final long SAVE_DELAY_MS = 500; // Debounce delay in milliseconds
-
     // Constructor
-    public SaveFile(String title, String description, float x, float y) {
+    public UNUSEDsavefile(String title, String description, float x, float y) {
         this.title = title;
         this.description = description;
         this.x = x;
         this.y = y;
-    }
-
-    // Debounce autosave trigger
-    private void triggerDebouncedSave(Context context) {
-        if (saveRunnable != null) {
-            saveHandler.removeCallbacks(saveRunnable);
-        }
-
-        saveRunnable = () -> saveNote(context);
-        saveHandler.postDelayed(saveRunnable, SAVE_DELAY_MS);
     }
 
     // Getters and Setters
@@ -43,53 +24,50 @@ public class SaveFile implements Parcelable {
         return title;
     }
 
-    public void setTitle(String title, Context context) {
+    public void setTitle(String title) {
         this.title = title;
-        triggerDebouncedSave(context);
     }
-
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description, Context context) {
+    public void setDescription(String description) {
         this.description = description;
-        triggerDebouncedSave(context);
     }
+
     public float getX() {
         return x;
     }
 
-    public void setX(float x, Context context) {
+    public void setX(float x) {
         this.x = x;
-        triggerDebouncedSave(context);
     }
+
     public float getY() {
         return y;
     }
 
-    public void setY(float y, Context context) {
+    public void setY(float y) {
         this.y = y;
-        triggerDebouncedSave(context);
     }
 
-    // Parcelable
-    protected SaveFile(Parcel in) {
+
+    protected UNUSEDsavefile(Parcel in) {
         title = in.readString();
         description = in.readString();
         x = in.readFloat();
         y = in.readFloat();
     }
-    public static final Creator<SaveFile> CREATOR = new Creator<SaveFile>() {
+    public static final Creator<UNUSEDsavefile> CREATOR = new Creator<UNUSEDsavefile>() {
         @Override
-        public SaveFile createFromParcel(Parcel in) {
-            return new SaveFile(in);
+        public UNUSEDsavefile createFromParcel(Parcel in) {
+            return new UNUSEDsavefile(in);
         }
 
         @Override
-        public SaveFile[] newArray(int size) {
-            return new SaveFile[size];
+        public UNUSEDsavefile[] newArray(int size) {
+            return new UNUSEDsavefile[size];
         }
     };
 
@@ -106,7 +84,7 @@ public class SaveFile implements Parcelable {
         dest.writeFloat(y);
     }
     // Function to save the note data (including X and Y) using SharedPreferences.
-    public void saveNote(Context context) {
+    public void saveNote(android.content.Context context) {
         android.content.SharedPreferences sharedPreferences = context.getSharedPreferences("NotesData", android.content.Context.MODE_PRIVATE);
         android.content.SharedPreferences.Editor editor = sharedPreferences.edit();
 
@@ -127,18 +105,19 @@ public class SaveFile implements Parcelable {
         editor.apply(); // Save data asynchronously
     }
     // Function to load a saved note (static method)
-    public static SaveFile loadSavedNote(Context context, String noteTitle) {
+    public static UNUSEDsavefile loadSavedNote(android.content.Context context, String noteTitle) {
         android.content.SharedPreferences sharedPreferences = context.getSharedPreferences("NotesData", android.content.Context.MODE_PRIVATE);
 
         String noteId = "Note_" + noteTitle.hashCode(); // Retrieve the same ID format
 
-        String title = sharedPreferences.getString(noteId + "noteTitle", null);
+        String title = sharedPreferences.getString(noteId + "_Title", null);
         if (title == null) return null; // Note not found
+
 
         String description = sharedPreferences.getString(noteId+ "noteDescription", "");
         float x = sharedPreferences.getFloat(noteId + "noteX", 0.0f);
         float y = sharedPreferences.getFloat(noteId + "noteY", 0.0f);
 
-        return new SaveFile(title, description, x, y);
+        return new UNUSEDsavefile(title, description, x, y);
     }
 }

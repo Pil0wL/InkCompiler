@@ -17,5 +17,17 @@
         layout="@layout/editing_main_overlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+    <!-- New Settings fragment container -->
+    <FrameLayout
+        android:id="@+id/settings_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="16dp"
+        android:background="@android:color/white"
+        android:elevation="10dp"
+        android:visibility="visible" />
+
 </FrameLayout>
 
