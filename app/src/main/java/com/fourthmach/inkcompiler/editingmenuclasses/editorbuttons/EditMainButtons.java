@@ -22,6 +22,8 @@ public class EditMainButtons {
     private final RelativeLayout overlayButtonsContainer;
 
     public final Button AddButton;
+    public final Button RemoveButton;
+    public final Button SettingsButton;
     public EditMainButtons(EFIActivityInfo efiActivityInfo) {
         this.currentActivity = efiActivityInfo.activity;
         this.overlayButtonsContainer = efiActivityInfo.overlayButtonsContainer;
@@ -30,6 +32,8 @@ public class EditMainButtons {
         bindEditMenuButtons();
 
         AddButton = overlayButtonsContainer.findViewById(R.id.editmenu_add_button);
+        RemoveButton = overlayButtonsContainer.findViewById(R.id.editmenu_remove_button);
+        SettingsButton = overlayButtonsContainer.findViewById(R.id.editmenu_settings_button);
     }
 
     public Button[] editor_buttons;

@@ -1,6 +1,7 @@
 package com.fourthmach.inkcompiler.editingmenuclasses;
 
 import android.app.Activity;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
@@ -22,5 +23,7 @@ public class EFIActivityInfo {
     public DraggableBoxSettings draboxSettings;
 
     public ArrayList<EnhancedDraggableLayout> selectedDraBoxes = new ArrayList<>();
+
+    public View screenDragClickDetector;
 
 }

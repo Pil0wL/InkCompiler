@@ -1,5 +1,6 @@
 package com.fourthmach.inkcompiler.editingmenuclasses.enhanceddraggable.standardfunctions;
 
+import com.fourthmach.inkcompiler.SaveFileSystem.EditingSaveFile;
 import com.fourthmach.inkcompiler.editingmenuclasses.EFIActivityInfo;
 import com.fourthmach.inkcompiler.editingmenuclasses.HelperForDraggableContainer;
 import com.fourthmach.inkcompiler.editingmenuclasses.enhanceddraggable.EnhancedDraggableLayout.EnhancedDraggableLayout;
@@ -14,32 +15,38 @@ public class MoveFunction extends functionbase {
     public void actionMove(EnhancedDraggableLayout.ActionArgs actionArgs, EnhancedDraggableLayout enhancedDraggableBox) {
         float rawX = actionArgs.event.getRawX();
         float rawY = actionArgs.event.getRawY();
-        {
-            float newX = rawX - actionArgs.dX;
-            float newY = rawY - actionArgs.dY;
-            enhancedDraggableBox.setX(newX);
-            enhancedDraggableBox.setY(newY);
 
-            enhancedDraggableBox.rnoiotsf.changeXY(newX, newY);
-        }
+        enhancedDraggableBox.setX(rawX - actionArgs.dX);
+        enhancedDraggableBox.setY(rawY - actionArgs.dY);
 
         for (EnhancedDraggableLayout.ActionArgs.initialSelectedInfo info: actionArgs.selectedDraBoxesInfo) {
-            float newX = rawX - info.dX;
-            float newY = rawY - info.dY;
             EnhancedDraggableLayout mainBody = info.mainBody;
-            mainBody.setX(newX);
-            mainBody.setY(newY);
-
-            mainBody.rnoiotsf.changeXY(newX, newY);
+            mainBody.setX(rawX - info.dX);
+            mainBody.setY(rawY - info.dY);
         }
     }
     @Override
     public void actionUp(EnhancedDraggableLayout.ActionArgs actionArgs, EnhancedDraggableLayout enhancedDraggableBox) {
-        enhancedDraggableBox.rnoiotsf.finalizeChangeXY();
 
-        for
-        (EnhancedDraggableLayout.ActionArgs.initialSelectedInfo info: actionArgs.selectedDraBoxesInfo)
-            info.mainBody.rnoiotsf.finalizeChangeXY();
+        // difference from start
+        float dsX = actionArgs.event.getRawX() - actionArgs.startX;
+        float dsY = actionArgs.event.getRawY() - actionArgs.startY;
+        {
+            EditingSaveFile.Note rnoiotsf = enhancedDraggableBox.rnoiotsf;
+            rnoiotsf.changeXY(
+                    rnoiotsf.x + dsX,
+                    rnoiotsf.y + dsY
+            );
+        }
+
+        for (EnhancedDraggableLayout.ActionArgs.initialSelectedInfo info: actionArgs.selectedDraBoxesInfo){
+            EditingSaveFile.Note rnoiotsf = info.mainBody.rnoiotsf;
+
+            rnoiotsf.changeXY(
+                    rnoiotsf.x + dsX,
+                    rnoiotsf.y + dsY
+            );
+        }
 
         efiActivityInfo.editingSaveFile.save();
     }

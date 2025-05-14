@@ -11,10 +11,13 @@
         android:id="@+id/maindraggableboxcontainer"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:background="#CCCCCC"
+
+        android:background="@null"
         android:layout_gravity="center"
         android:clipChildren="false"
-        android:clipToPadding="false">
+        android:clipToPadding="false"
+        >
+        <!-- use this for testing android:background="#CCCCCC" -->
     </com.fourthmach.inkcompiler.editingmenuclasses.MainDraBoxContainer.MainDraBoxContainer>
 
 </FrameLayout>
