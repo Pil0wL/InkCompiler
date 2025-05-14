@@ -58,6 +58,12 @@ public class ResizeFunction extends functionbase {
 
     @Override
     public void actionUp(EnhancedDraggableLayout.ActionArgs actionArgs, EnhancedDraggableLayout enhancedDraggableBox) {
+        float deltaX = actionArgs.event.getRawX() - actionArgs.startX;
+        int newWidth = (int) (actionArgs.resizingLeft ? (actionArgs.initialWidth - deltaX) : (actionArgs.initialWidth + deltaX));
+        enhancedDraggableBox.rnoiotsf.changeWidth(newWidth);
+
+        efiActivityInfo.editingSaveFile.save();
+
         RichTextRenderer richTextRenderer = enhancedDraggableBox.richTextRenderer;
         richTextRenderer.UpdateRender();
     }

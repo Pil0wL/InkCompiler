@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/noteSettingsFrame"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@android:color/white">
+
+    <!-- Back Button (Top Left) -->
+    <ImageButton
+        android:id="@+id/noteSettingsBtnBack"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="start|top"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        android:contentDescription="Back"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="8dp" />
+
+    <!-- Scrollable Content -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="80dp">
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <!-- Bold -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:minHeight="48dp"
+                android:paddingTop="16dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Bold" />
+
+                <Switch
+                    android:id="@+id/noteSettingsSwitchBold"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp" />
+            </LinearLayout>
+
+            <!-- Italic -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:minHeight="48dp"
+                android:paddingTop="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Italic" />
+
+                <Switch
+                    android:id="@+id/noteSettingsSwitchItalic"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp" />
+            </LinearLayout>
+
+            <!-- Underline -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:minHeight="48dp"
+                android:paddingTop="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Underline" />
+
+                <Switch
+                    android:id="@+id/noteSettingsSwitchUnderline"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp" />
+            </LinearLayout>
+
+            <!-- Text Size -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:minHeight="48dp"
+                android:paddingTop="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Text Size" />
+
+                <EditText
+                    android:id="@+id/noteSettingsInputTextSize"
+                    android:layout_width="100dp"
+                    android:layout_height="48dp"
+                    android:inputType="number"
+                    android:hint="e.g. 16"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="8dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>

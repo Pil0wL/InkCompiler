@@ -21,6 +21,7 @@ import com.fourthmach.inkcompiler.editingmenuclasses.enhanceddraggable.RichTextR
 import com.fourthmach.inkcompiler.editingmenuclasses.enhanceddraggable.RichTextRenderer.segment.richtextsegmentText;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class RichTextRenderer extends FrameLayout {
 
@@ -380,6 +381,8 @@ public class RichTextRenderer extends FrameLayout {
 
         {
             int newHeight = (int) renderState.totalHeight;
+            newHeight = lastText.equals("") ? 50 : newHeight;
+
             FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
                     FrameLayout.LayoutParams.MATCH_PARENT, // match parent width
                     newHeight                            // manually set height in px

@@ -71,6 +71,14 @@ public class MainActivity extends AppCompatActivity {
             adapter.updateData(loadedSaveFiles);
         });
 
+        findViewById(R.id.creditButton).setOnClickListener(v -> {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.credits_container, new CreditFragment())
+                    .addToBackStack(null)
+                    .commit();
+        });
+
         Log.d("MainActivity", "Loaded MainActivity!");
         /*
         setSupportActionBar(binding.appBarMain.toolbar);

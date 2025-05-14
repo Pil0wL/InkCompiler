@@ -1,4 +1,6 @@
 package com.fourthmach.inkcompiler.SaveFileSystem;
+import static com.fourthmach.inkcompiler.editingmenuclasses.enhanceddraggable.helperFunctions.helperFunctions.getDateRightNow;
+
 import android.content.Context;
 import android.util.Log;
 
@@ -13,6 +15,10 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.HashMap;
 public class SaveFileManager {
     public static Context applicationContext;
@@ -39,6 +45,8 @@ public class SaveFileManager {
             long timestamp = System.currentTimeMillis();
             filename = Long.toString(timestamp);
         }
+
+
         File file = new File(folder, filename);
 
         try {
@@ -48,6 +56,7 @@ public class SaveFileManager {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
 
 
         Log.d("SaveFileManager",
@@ -60,8 +69,8 @@ public class SaveFileManager {
     public static ShallowSaveFile officiateNewSaveFile() {
         ShallowSaveFile newFile = new ShallowSaveFile();
         ShallowSaveFile.DefaultSettings defaultSettings = newFile.defaultSettings;
-        newFile.DateCreated = "Today";
-        newFile.DateModified = "Today LOL ( but through the officiate thing )";
+        newFile.DateCreated = getDateRightNow();
+        newFile.DateModified = getDateRightNow();
 
         JSONObject mainJSON = new JSONObject();
         try { mainJSON.put("dc", newFile.DateCreated); }
@@ -148,14 +157,14 @@ public class SaveFileManager {
                         createdSaveFile.DateCreated = dateCreated;
                     } catch (JSONException e) {
                         e.printStackTrace();
-                        createdSaveFile.DateCreated = "The date tosday";
+                        createdSaveFile.DateCreated = getDateRightNow();
                     }
                     try {
                         String lastModified = loadedJSON.getString("lm");
                         createdSaveFile.DateModified = lastModified;
                     } catch (JSONException e) {
                         e.printStackTrace();
-                        createdSaveFile.DateModified = "The date toseday";
+                        createdSaveFile.DateModified = getDateRightNow();
                     }
 
 
