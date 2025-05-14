@@ -3,15 +3,15 @@
     android:id="@+id/draggable_box"
     android:layout_width="100dp"
     android:layout_height="100dp"
-    android:background="@color/post_it_purple"
+    android:background="@color/purple_200"
     android:orientation="vertical"
     android:padding="8dp">
 
     <!-- Example content inside the box -->
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/drag_me"
-        android:textColor="@color/black" />
+        android:textColor="@color/white"/>
 
 </LinearLayout>

@@ -10,6 +10,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.fourthmach.inkcompiler.SaveFileSystem.SaveFileManager;
+import com.fourthmach.inkcompiler.SaveFileSystem.ShallowSaveFile;
+import com.fourthmach.inkcompiler.editingmenuclasses.EditingFileInfoActivity;
+
 public class SaveFileInfoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,13 +23,10 @@ public class SaveFileInfoActivity extends AppCompatActivity {
         TextView titleTextView = findViewById(R.id.item_title);
         TextView descriptionTextView = findViewById(R.id.item_description);
 
+        ShallowSaveFile selectedSaveFile = SaveFileManager.beholdedShallowSaveFile;
 
-        android.content.Intent current_intent = getIntent();
-        SaveFile save_file = current_intent.getParcelableExtra("save_file");
-
-        // Get data from the intent
-        String title = save_file.getTitle();
-        String description = save_file.getDescription();
+        String title = selectedSaveFile.FileName;
+        String description = String.format("Date created: %s | Date Modified: %s", selectedSaveFile.DateCreated, selectedSaveFile.DateModified);
 
         // Set the data to the views
         titleTextView.setText(title);
@@ -45,7 +46,6 @@ public class SaveFileInfoActivity extends AppCompatActivity {
                 // Do something when the button is clicked
 
                 Intent intent = new Intent(SaveFileInfoActivity.this, EditingFileInfoActivity.class);
-                intent.putExtra("save_file", save_file);
 
 
                 startActivity(intent);

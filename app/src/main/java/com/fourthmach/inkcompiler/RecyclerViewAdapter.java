@@ -10,14 +10,21 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.fourthmach.inkcompiler.SaveFileSystem.ShallowSaveFile;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
-    private final List<SaveFile>  itemList;
+    private final HashMap<String, ShallowSaveFile> itemMap;
+    private final ArrayList<String> keyList; // For position-based access
     private final OnItemClickListener listener;
 
-    public RecyclerViewAdapter(List<SaveFile> itemList, OnItemClickListener listener) {
-        this.itemList = itemList;
+    public RecyclerViewAdapter(HashMap<String, ShallowSaveFile> itemMap, OnItemClickListener listener) {
+        this.itemMap = itemMap;
+        this.keyList = new ArrayList<>(itemMap.keySet()); // Maintain order
         this.listener = listener;
     }
 
@@ -30,9 +37,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        SaveFile item = itemList.get(position);
-        holder.title.setText(item.getTitle());
-        holder.description.setText(item.getDescription());
+        String key = keyList.get(position);
+        ShallowSaveFile item = itemMap.get(key);
+        if (item == null) return;
+
+        holder.title.setText(item.FileName);
+        // holder.description.setText(item.getDescription());
 
         holder.itemView.setOnClickListener(v -> {
             listener.onItemClick(item);
@@ -41,7 +51,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public int getItemCount() {
-        return itemList.size();
+        return keyList.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -55,6 +65,31 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     public interface OnItemClickListener {
-        void onItemClick(SaveFile item);
+        void onItemClick(ShallowSaveFile item);
+    }
+
+    // Optional: if you need to update the map and refresh view
+    public void updateData(HashMap<String, ShallowSaveFile> newMap) {
+        // Only update items that actually changed
+        for (Map.Entry<String, ShallowSaveFile> entry : newMap.entrySet()) {
+            itemMap.put(entry.getKey(), entry.getValue());
+        }
+
+        // Refresh the keyList based on the updated itemMap
+        keyList.clear();
+        keyList.addAll(itemMap.keySet());
+
+        // Notify RecyclerView that the data has changed
+        notifyDataSetChanged();
+    }
+
+    // Optional: remove by key
+    public void removeItem(String key) {
+        if (itemMap.containsKey(key)) {
+            int index = keyList.indexOf(key);
+            itemMap.remove(key);
+            keyList.remove(key);
+            notifyItemRemoved(index);
+        }
     }
 }
