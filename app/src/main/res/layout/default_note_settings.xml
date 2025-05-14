@@ -45,7 +45,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Bold" />
+                    android:text="Bold"
+                    android:textColor="@color/light_gray" />
 
                 <Switch
                     android:id="@+id/noteSettingsSwitchBold"
@@ -66,7 +67,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Italic" />
+                    android:text="Italic"
+                    android:textColor="@color/light_gray" />
 
                 <Switch
                     android:id="@+id/noteSettingsSwitchItalic"
@@ -87,7 +89,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Underline" />
+                    android:text="Underline"
+                    android:textColor="@color/light_gray" />
 
                 <Switch
                     android:id="@+id/noteSettingsSwitchUnderline"
@@ -108,7 +111,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Text Size" />
+                    android:text="Text Size"
+                    android:textColor="@color/light_gray" />
 
                 <EditText
                     android:id="@+id/noteSettingsInputTextSize"
