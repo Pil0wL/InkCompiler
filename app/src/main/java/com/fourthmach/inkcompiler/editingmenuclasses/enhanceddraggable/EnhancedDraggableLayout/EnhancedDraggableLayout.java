@@ -76,6 +76,13 @@ public class EnhancedDraggableLayout extends FrameLayout {
         selectionBorder.setVisibility(View.INVISIBLE);
     }
 
+
+    public void Destroy() {
+        efiActivityInfo.containerFor_draggableBox.removeView(this);
+        efiActivityInfo.editingSaveFile.removeBox(rnoiotsf);
+
+        rnoiotsf = null;
+    }
     EFIActivityInfo efiActivityInfo;
     public void actualStart(EFIActivityInfo efiActivityInfo) {
         this.efiActivityInfo = efiActivityInfo;

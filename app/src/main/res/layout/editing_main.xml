@@ -8,13 +8,26 @@
         android:id="@+id/editing_main_draggablecontainer"
         layout="@layout/editing_main_draggablecontainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        />
 
+
+    <View
+        android:id="@+id/editingmain_dragscreen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <include
         android:id="@+id/editing_main_overlay"
         layout="@layout/editing_main_overlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+
+    <FrameLayout
+        android:id="@+id/note_settings_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
 </FrameLayout>
 

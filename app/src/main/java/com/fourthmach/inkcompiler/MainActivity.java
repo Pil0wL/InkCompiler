@@ -68,6 +68,22 @@ public class MainActivity extends AppCompatActivity {
         // Add the callback to the OnBackPressedDispatcher
         getOnBackPressedDispatcher().addCallback(this, callback);
 
+        findViewById(R.id.addsavefilebuttonindamenu).setOnClickListener(v -> {
+            ShallowSaveFile created = SaveFileManager.officiateNewSaveFile();
+            loadedSaveFiles.put(created.FileName, created);
+
+            adapter.updateData(loadedSaveFiles);
+        });
+
+        findViewById(R.id.creditButton).setOnClickListener(v -> {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.credits_container, new CreditFragment())
+                    .addToBackStack(null)
+                    .commit();
+        });
+
+        Log.d("MainActivity", "Loaded MainActivity!");
         /*
         setSupportActionBar(binding.appBarMain.toolbar);
         if (binding.appBarMain.fab != null) {

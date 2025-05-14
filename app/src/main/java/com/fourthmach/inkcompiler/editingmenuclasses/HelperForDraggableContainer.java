@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import com.fourthmach.inkcompiler.R;
 import com.fourthmach.inkcompiler.SaveFileSystem.EditingSaveFile;
@@ -32,6 +33,12 @@ public class HelperForDraggableContainer {
     }
 
 
+    public void removeSelectedBoxes() {
+
+        for (EnhancedDraggableLayout selectedDraBox: efiActivityInfo.selectedDraBoxes) selectedDraBox.Destroy();
+        editingSaveFile.save();
+    }
+
     private void createNewBox(EditingSaveFile.Note rnoiotsf) {
         EnhancedDraggableLayout enhancedDraggableBox = (EnhancedDraggableLayout) currentActivity.getLayoutInflater().inflate(R.layout.draggable_box, containerFor_draggableBox, false);
         enhancedDraggableBox.rnoiotsf = rnoiotsf;
@@ -41,6 +48,13 @@ public class HelperForDraggableContainer {
 
         enhancedDraggableBox.setX(rnoiotsf.x);
         enhancedDraggableBox.setY(rnoiotsf.y);
+        {
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    rnoiotsf.width,
+                    10 // will be changed
+            );
+            enhancedDraggableBox.setLayoutParams(params);
+        }
 
 
 
@@ -69,7 +83,7 @@ public class HelperForDraggableContainer {
     public void addNewBox() {
         float x = 0;
         float y = 0;
-        String rawText = "";
+        String rawText = "to start off use \"\\<\" to initiate a tag and > to close it, tags:\nb is to bold\ni is to italicize\nu is to underline\n\nthere are some special tags with parameters that are needed you can do tihs via \\<tagname;argument1;argument2;...>\nsize = set the remaining text size with the first argument as the size";
 
         EditingSaveFile.Note rnoiotsf = editingSaveFile.addBox(x, y, rawText);
         editingSaveFile.save();
@@ -79,6 +93,8 @@ public class HelperForDraggableContainer {
 
 
     public void changeMode(int newMode) {
+        efiActivityInfo.screenDragClickDetector.setOnTouchListener(null);
+
         for (int i = 0; i < containerFor_draggableBox.getChildCount(); i++) {
             FrameLayout child = (FrameLayout) containerFor_draggableBox.getChildAt(i);
 
