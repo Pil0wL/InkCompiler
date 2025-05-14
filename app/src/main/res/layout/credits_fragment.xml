@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/creditFragmentRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -24,87 +24,97 @@
         android:padding="24dp">
         <!-- Leave room for the back button -->
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center_horizontal">
-
-        <!-- Example Name + Role Block -->
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Cadmon Jas A. Libetario"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_marginTop="16dp" />
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Project Lead"
-            android:textSize="16sp"
-            android:layout_marginBottom="16dp" />
+            <!-- Example Name + Role Block -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cadmon Jas A. Libetario"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/light_gray"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Gomocio, Neil Zhann Z."
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_marginTop="16dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Project Lead"
+                android:textSize="16sp"
+                android:layout_marginBottom="16dp"
+                android:textColor="@color/light_gray" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="UI/UX Developer"
-            android:textSize="16sp"
-            android:layout_marginBottom="16dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gomocio, Neil Zhann Z."
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/light_gray" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Segalle, Carl Justine C."
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_marginTop="16dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="UI/UX Developer"
+                android:textSize="16sp"
+                android:layout_marginBottom="16dp"
+                android:textColor="@color/light_gray" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Back-End Developer"
-            android:textSize="16sp"
-            android:layout_marginBottom="16dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Segalle, Carl Justine C."
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/light_gray" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Encarnacion, Christian Gabriel P."
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_marginTop="16dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Back-End Developer"
+                android:textSize="16sp"
+                android:layout_marginBottom="16dp"
+                android:textColor="@color/light_gray" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="UI/UX Developer"
-            android:textSize="16sp"
-            android:layout_marginBottom="16dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Encarnacion, Christian Gabriel P."
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/light_gray" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Bautista III, Arsenio B."
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_marginTop="16dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="UI/UX Developer"
+                android:textSize="16sp"
+                android:layout_marginBottom="16dp"
+                android:textColor="@color/light_gray" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Debugger, Tester, and Miscellaneous"
-            android:textSize="16sp"
-            android:layout_marginBottom="16dp" />
-    </LinearLayout>
-</ScrollView>
-    </FrameLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bautista III, Arsenio B."
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/light_gray" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Debugger, Tester, and Miscellaneous"
+                android:textSize="16sp"
+                android:layout_marginBottom="16dp"
+                android:textColor="@color/light_gray" />
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>
