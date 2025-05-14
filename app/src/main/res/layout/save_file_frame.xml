@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/post_it"
-    android:backgroundTint="@color/post_it"
+    android:background="@color/background_grey"
+    android:backgroundTint="@color/background_grey"
     android:gravity="fill_vertical"
     android:orientation="vertical"
     android:padding="32dp">

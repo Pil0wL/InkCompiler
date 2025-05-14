@@ -11,4 +11,7 @@
     <color name="post_it_purple">#D5B3FF</color>
     <color name="Post_it_brown" >#92623a</color>
     <color name="pencil_lead">#5C6274</color>
+    <color name="background_grey">#eae9eb</color>
+    <color name="background_lowlight">#b3b1b3</color>
+    <color name="button_lightmode">#706f70</color>
 </resources>
